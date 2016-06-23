@@ -1,0 +1,19 @@
+{
+  "name": "winode",
+  "version": "0.1.0",
+  "main": "./lib/winode.js",
+  "dependencies": {
+    "ffi": "^2.0.0",
+    "node-sdl2": "^2.0.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
