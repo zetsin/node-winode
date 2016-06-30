@@ -1,0 +1,8 @@
+exports.app = require('./lib/app')
+exports.window = require('./lib/window')
+exports.font = require('./lib/font')
+exports.image = require('./lib/image')
+exports.clipboard = require('./lib/clipboard')
+exports.power = require('./lib/power')
+exports.mouse = require('./lib/mouse')
+exports.keyboard = require('./lib/keyboard')

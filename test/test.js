@@ -1,37 +1,50 @@
-var winode = require('../lib/winode')
-var app = winode.app
-var window = winode.window
+var winode = require('../index')
 
-app.on('before-quit', function (event) {
+winode.app.on('before-quit', function (event) {
 	// event.preventDefault()
 })
 
+console.log(winode.power.info)
+console.log(winode.mouse.state)
+console.log(winode.keyboard.state)
+winode.mouse.setCursor('hand')
 
-var win = window()
+
+var win = new winode.window
+var render = win.render
+var gfx = win.render.gfx
+
 win.on('close', function() {
-	app.quit()
+	winode.app.quit()
 })
-win.setOpacity()
+win.on('change', function() {
+	draw()
+})
 
-// window.showMessageBox({
-// 	buttons: [
-// 		{
-// 			text: 'text',
-// 		},
-// 		{
-// 			text: 'text2',
-// 		}
-// 	],
-// 	colors: {
-// 		background: 0x1
-// 	}
-// }, function(button, index) {
-// 	console.log(index)
-// })
-// window.showSimpleMessageBox('刘小花hello', 'world', 'error', win)
+var image = new winode.image(__dirname + '/QQ.png')
+var font = new winode.font(__dirname + '/华文黑体.ttf')
+// setInterval(draw, 1000 / 24)
 
-// setInterval(function() {
-// 	console.log(win.isVisible())
-// })
+function draw() {
+	winode.keyboard.setTextInput([400, 400, 500, 500])
 
-// var win2 = window()
+	render.copy(image.texture(render), null)
+
+	gfx.rectFilled(100, 100, 200, 200, [0xabcdef, 100])
+	gfx.ellipseFilled(600, 500, 200, 100, 0xfedcba)
+	render.drawLine([
+		[0, 0],
+		[200, 200]
+	])
+	gfx.bezier([
+		[300, 400],
+		[200, 500],
+		[700, 300]
+	], 999, 0x667788)
+
+
+	let text = font.blend('你好Hello', [0xaaaaaa, 0xaa], 0xffffff)
+	render.cut(text.texture(render))
+	render.present()
+
+}
